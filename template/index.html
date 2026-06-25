@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h1>Todo App</h1>
+    <form action="/add" method="post">
+        <input type="text" name="todo" placeholder="Enter task">
+        <input type="text" name="des" placeholder="Enter description">
+        <input type="submit">
+</form>
+
+<ul>
+    {% for element in todo %}
+    <li>
+        <h2>{{ element.task }}</h2>
+        <p>{{ element.des }}</p>
+
+        <input type="checkbox" {% if element.is_done %} checked {% endif %}
+        onchange="window.location.href='/update/{{ element.id}}'">
+        {{element.task}}
+
+        <span>
+            <form action="/delete/{{ element.id }}" method="post">
+            <button type="submit">Delete</button>
+            </form>
+        </span>
+    
+    </li>
+    {% endfor %}
+</ul>
+</body>
+</html>
